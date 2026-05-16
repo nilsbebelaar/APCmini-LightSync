@@ -33,6 +33,7 @@ MIDI_OUTPUT_PORT = "loopMIDI Port 1"
 
 # MIDI status byte for note-on message (channel 1)
 NOTE_ON = 0x96
+NOTE_BLINK = 0x9d
 
 
 def get_button_colors(
@@ -106,7 +107,7 @@ def sync_apc_lights(
 
             # Special case: if button is playing (c0ffc0), use status byte 0x9c with red (ff0000)
             if color_hex.lower() == "c0ffc0":
-                status_byte = 0x9c
+                status_byte = NOTE_BLINK
                 midi_value = get_midi_value("ff0000")
                 if midi_value is None:
                     midi_value = 127  # fallback to max brightness for red if not mapped
